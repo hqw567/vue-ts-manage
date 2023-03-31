@@ -52,7 +52,7 @@ const accountRef = ref<InstanceType<typeof PanelAccount>>()
 
 const handleLoginBtnClick = () => {
   if (activeName.value === 'account') {
-    accountRef.value?.handleLoginAction('Herway')
+    accountRef.value?.loginAction()
   } else {
   }
 }

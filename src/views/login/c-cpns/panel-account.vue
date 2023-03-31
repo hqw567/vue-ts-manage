@@ -1,6 +1,7 @@
 <template>
   <div class="panel-account">
     <el-form
+      ref="formRef"
       status-icon
       label-width="60"
       size="large"
@@ -23,9 +24,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import type { FormRules } from 'element-plus'
-const account = reactive({
+import { reactive, ref } from 'vue'
+import type { FormRules, ElForm } from 'element-plus'
+import { ElMessage } from 'element-plus'
+
+import { useLoginStore } from '../../../store/login/login'
+// import type { IAccount } from '../../../types'
+import type { IAccount } from '@/types'
+const account = reactive<IAccount>({
   name: '',
   password: ''
 })
@@ -40,12 +46,23 @@ const accountRules: FormRules = {
     { pattern: /^[a-z0-9]{3,}$/, message: '3位以上', trigger: 'blur' }
   ]
 }
-
-const handleLoginAction = (name: string) => {
-  console.log('我处理了 :>> ', '我处理了', name, account.name, account.password)
+const loginStore = useLoginStore()
+const formRef = ref<InstanceType<typeof ElForm>>()
+function loginAction() {
+  formRef.value?.validate((valid) => {
+    if (valid) {
+      const { name, password } = account
+      console.log(name, password)
+      loginStore.loginAccountAction({ name, password })
+      // accountLoginRequest().then((res) => {})
+    } else {
+      ElMessage.error('请输入正确')
+    }
+  })
 }
+
 defineExpose({
-  handleLoginAction
+  loginAction
 })
 </script>
 

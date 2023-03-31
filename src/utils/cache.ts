@@ -1,36 +1,34 @@
-enum CacheType {
-  local = 'local',
-  session = 'session'
+enum cacheType {
+  Local,
+  Session
 }
-
-class HYCache {
+class Cache {
   storage: Storage
 
-  constructor(type: CacheType) {
-    this.storage = type === CacheType.local ? localStorage : sessionStorage
+  constructor(type: cacheType) {
+    this.storage = type === cacheType.Local ? localStorage : sessionStorage
   }
 
   setCache(key: string, value: any) {
-    this.storage.setItem(key, JSON.stringify(value))
+    if (value) {
+      this.storage.setItem(key, JSON.stringify(value))
+    }
   }
-
   getCache(key: string) {
     const value = this.storage.getItem(key)
     if (value) {
       return JSON.parse(value)
     }
   }
-
-  deleteCache(key: string) {
+  removeCache(key: string) {
     this.storage.removeItem(key)
   }
-
-  clearCache() {
+  clear() {
     this.storage.clear()
   }
 }
 
-const localCache = new HYCache(CacheType.local)
-const sessionCache = new HYCache(CacheType.session)
+const localCache = new Cache(cacheType.Local)
+const sessionCache = new Cache(cacheType.Session)
 
 export { localCache, sessionCache }
