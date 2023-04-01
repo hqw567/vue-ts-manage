@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <el-container>
+    <el-container style="max-height: 100vh">
       <el-aside :width="isFold ? '64px' : '200px'">
         <main-menu :is-fold="isFold" />
       </el-aside>
@@ -25,7 +25,7 @@ const router = useRouter()
 
 const isFold = ref(false)
 function handleFoldChange(flag: boolean) {
-  console.log(flag)
+  // console.log(flag)
   isFold.value = flag
   // mainMenuRef.isCollapse.value = e
 }
@@ -33,8 +33,10 @@ function handleFoldChange(flag: boolean) {
 
 <style lang="less" scoped>
 .main {
-  height: 100%;
-  background-color: #e6e6e6;
+  // height: 100%;
+  max-height: 100vh;
+  overflow: auto;
+  background-color: #f8f8f8;
 }
 .el-container {
   min-height: 100%;

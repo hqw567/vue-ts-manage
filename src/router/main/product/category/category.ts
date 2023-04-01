@@ -1,4 +1,7 @@
+const category = () => import('@/views/product/category/category.vue')
 export default {
   path: '/main/product/category',
-  component: () => import('../views/main/product/category/category.vue')
+  name: 'category',
+  component: category,
+  children: []
 }

@@ -6,11 +6,7 @@
           <component :is="isFold ? 'Fold' : 'Expand'"></component>
         </el-icon>
       </div>
-
-      <el-breadcrumb separator-icon="ArrowRight">
-        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-        <el-breadcrumb-item>promotion management</el-breadcrumb-item>
-      </el-breadcrumb>
+      <header-crumb />
     </div>
 
     <div class="header-right">
@@ -39,6 +35,7 @@ import { LOGIN_TOKEN } from '@/global/constants'
 import router from '@/router'
 import { localCache } from '@/utils/cache'
 import { ref } from 'vue'
+import HeaderCrumb from './c-cpns/header-crumb.vue'
 
 const emit = defineEmits(['foldChange'])
 const isFold = ref(false)

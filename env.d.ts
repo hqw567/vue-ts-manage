@@ -5,3 +5,5 @@ declare module '*.vue' {
   const component: DefindComponent
   export default component
 }
+
+declare module '*.mjs'

@@ -1,4 +1,7 @@
+const chat = () => import('@/views/story/chat/chat.vue')
 export default {
   path: '/main/story/chat',
-  component: () => import('../views/main/story/chat/chat.vue')
+  name: 'chat',
+  component: chat,
+  children: []
 }

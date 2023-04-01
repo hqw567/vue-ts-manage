@@ -1,4 +1,7 @@
+const menu = () => import('@/views/system/menu/menu.vue')
 export default {
   path: '/main/system/menu',
-  component: () => import('../views/main/system/menu/menu.vue')
+  name: 'menu',
+  component: menu,
+  children: []
 }

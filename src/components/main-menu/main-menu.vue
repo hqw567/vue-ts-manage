@@ -6,7 +6,7 @@
     </div>
     <el-menu
       router
-      :default-active="fullPath"
+      :default-active="routePath"
       class="el-menu-vertical-demo"
       :collapse="isFold"
     >
@@ -26,9 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import route from '@/router'
 import { useLoginStore } from '@/store/login/login'
-import { ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+// import { ref } from 'vue'
 
 defineProps({
   isFold: {
@@ -39,8 +40,20 @@ defineProps({
 const loginStore = useLoginStore()
 const userMenus = loginStore.userMenus
 // const router = router()
-const fullPath = route.currentRoute.value.fullPath
-console.log('fullPath :>> ', fullPath)
+const route = useRoute()
+// console.log(route, route.path)
+
+const routePath = ref<string>()
+
+watch(
+  () => route.path,
+  (newPath, oldPath) => {
+    // route.path 发生了改变
+    routePath.value = newPath
+    // console.log('Route path changed from', oldPath, 'to', newPath)
+  },
+  { immediate: true }
+)
 </script>
 
 <style lang="less" scoped>
