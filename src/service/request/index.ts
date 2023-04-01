@@ -42,7 +42,7 @@ class HYRequest {
 
     // 针对特定的hyRequest实例添加拦截器
     this.instance.interceptors.request.use(
-      // config.interceptors?.requestSuccessFn,
+      config.interceptors?.requestSuccessFn as any,
       config.interceptors?.requestFailureFn
     )
     this.instance.interceptors.response.use(
@@ -56,6 +56,8 @@ class HYRequest {
   request<T = any>(config: HYRequestConfig<T>) {
     // 单次请求的成功拦截处理
     if (config.interceptors?.requestSuccessFn) {
+      // console.log('---------')
+
       config = config.interceptors.requestSuccessFn(config)
     }
 
@@ -64,7 +66,7 @@ class HYRequest {
       this.instance
         .request<any, T>(config)
         .then((res) => {
-          // 单词响应的成功拦截处理
+          // 单次响应的成功拦截处理
           if (config.interceptors?.responseSuccessFn) {
             res = config.interceptors.responseSuccessFn(res)
           }

@@ -1,0 +1,10 @@
+<template>
+  <div class="role">role</div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style lang="less" scoped>
+.role {
+}
+</style>

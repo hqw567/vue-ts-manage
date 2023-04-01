@@ -45,14 +45,15 @@
 import { ref } from 'vue'
 import PanelAccount from './panel-account.vue'
 import PanelPhone from './panel-phone.vue'
+import { localCache } from '@/utils/cache'
 const activeName = ref('account')
-const isRemPwd = ref(false)
+const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)
 
 const accountRef = ref<InstanceType<typeof PanelAccount>>()
 
 const handleLoginBtnClick = () => {
   if (activeName.value === 'account') {
-    accountRef.value?.loginAction()
+    accountRef.value?.loginAction(isRemPwd.value)
   } else {
   }
 }

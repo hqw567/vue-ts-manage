@@ -31,9 +31,11 @@ import { ElMessage } from 'element-plus'
 import { useLoginStore } from '../../../store/login/login'
 // import type { IAccount } from '../../../types'
 import type { IAccount } from '@/types'
+import { localCache } from '@/utils/cache'
+import { REMEMBER_ACCOUNT } from '../../../global/constants'
 const account = reactive<IAccount>({
-  name: '',
-  password: ''
+  name: localCache.getCache(REMEMBER_ACCOUNT)?.name ?? '',
+  password: localCache.getCache(REMEMBER_ACCOUNT)?.password ?? ''
 })
 
 const accountRules: FormRules = {
@@ -48,12 +50,21 @@ const accountRules: FormRules = {
 }
 const loginStore = useLoginStore()
 const formRef = ref<InstanceType<typeof ElForm>>()
-function loginAction() {
+function loginAction(isRemPwd: boolean) {
   formRef.value?.validate((valid) => {
     if (valid) {
       const { name, password } = account
+
       console.log(name, password)
-      loginStore.loginAccountAction({ name, password })
+      loginStore.loginAccountAction({ name, password }).then((params) => {
+        if (isRemPwd) {
+          localCache.setCache(REMEMBER_ACCOUNT, account)
+          localCache.setCache('isRemPwd', isRemPwd)
+        } else {
+          localCache.removeCache(REMEMBER_ACCOUNT)
+          localCache.removeCache('isRemPwd')
+        }
+      })
       // accountLoginRequest().then((res) => {})
     } else {
       ElMessage.error('请输入正确')
