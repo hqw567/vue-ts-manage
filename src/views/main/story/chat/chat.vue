@@ -1,10 +1,12 @@
 <template>
-  <div class="chat">chat</div>
+  <div class="chat">
+    <h2>chat</h2>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="chat"></script>
 
-<style lang="less" scoped>
+<style scoped>
 .chat {
 }
 </style>

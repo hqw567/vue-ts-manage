@@ -1,10 +1,12 @@
 <template>
-  <div class="list">list</div>
+  <div class="list">
+    <h2>list</h2>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="list"></script>
 
-<style lang="less" scoped>
+<style scoped>
 .list {
 }
 </style>

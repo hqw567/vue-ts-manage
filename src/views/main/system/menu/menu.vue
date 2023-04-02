@@ -1,10 +1,12 @@
 <template>
-  <div class="menu">menu</div>
+  <div class="menu">
+    <h2>menu</h2>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="menu"></script>
 
-<style lang="less" scoped>
+<style scoped>
 .menu {
 }
 </style>

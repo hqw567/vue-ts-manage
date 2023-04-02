@@ -1,10 +1,10 @@
 <template>
   <div class="main">
-    <el-container style="max-height: 100vh">
+    <el-container style="min-height: 100vh">
       <el-aside :width="isFold ? '64px' : '200px'">
         <main-menu :is-fold="isFold" />
       </el-aside>
-      <el-container>
+      <el-container style="max-height: 100vh">
         <el-header height="50px"
           ><main-header @fold-change="handleFoldChange"
         /></el-header>
