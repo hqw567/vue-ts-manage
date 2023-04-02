@@ -12,6 +12,7 @@ import router from '../../router/index'
 import { LOGIN_TOKEN } from '@/global/constants'
 import type { RouteRecordRaw } from 'vue-router'
 import { mapMenusToRoutes } from '@/utils/map-menus'
+import useMainStore from '../main/main'
 
 export const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
@@ -54,6 +55,8 @@ export const useLoginStore = defineStore('login', {
       // }
 
       // console.log(router, 'router')
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
 
       const routes = mapMenusToRoutes(this.userMenus)
       // console.log(routes)
@@ -70,6 +73,10 @@ export const useLoginStore = defineStore('login', {
         this.token = token
         this.userInfo = userInfo
         this.userMenus = userMenus
+
+        const mainStore = useMainStore()
+        mainStore.fetchEntireDataAction()
+
         const routes = mapMenusToRoutes(this.userMenus)
         routes.forEach((route) => router.addRoute('main', route))
       } else {

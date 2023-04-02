@@ -1,21 +1,18 @@
 <template>
   <div class="user-content">
     <div class="header">
-      <div class="title">用户列表</div>
+      <div class="title">部门列表</div>
 
-      <el-button type="primary" @click="handleNewUserClick">新增用户</el-button>
+      <el-button type="primary" @click="handleNewUserClick">新增部门</el-button>
     </div>
-    <el-table :data="userList" border style="width: 100%; text-align: center">
+    <el-table :data="pageList" border style="width: 100%; text-align: center">
       <el-table-column align="center" type="selection" />
       <el-table-column align="center" prop="id" label="id" />
-      <el-table-column align="center" prop="name" label="用户名" />
-      <el-table-column align="center" prop="realname" label="真实姓名" />
-      <el-table-column align="center" prop="cellphone" label="手机号" />
-      <el-table-column align="center" prop="enable" label="启用状态">
+      <el-table-column align="center" prop="name" label="部门名称" />
+      <el-table-column align="center" prop="leader" label="部门领导" />
+      <el-table-column align="center" prop="parentId" label="上级部门">
         <template #default="scope">
-          <el-button color="#626aef" plain>{{
-            scope.row.enable ? '启用' : '禁用'
-          }}</el-button>
+          {{ getDepartmentsName(scope.row.parentId) }}
         </template>
       </el-table-column>
       <el-table-column align="center" prop="createAt" label="创建时间">
@@ -48,7 +45,7 @@
         v-model:page-size="pageSize"
         :page-sizes="[10, 20, 30, 40]"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="userTotalCount"
+        :total="pageTotalCount"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       />
@@ -57,45 +54,60 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 import useSystemStore from '@/store/main/system/system'
 import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
+import useMainStore from '@/store/main/main'
 
 const systemStore = useSystemStore()
-
+const mainStore = useMainStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
 const newModal = ref(false)
+const pageName = 'department'
+
+const { entireDepartments } = storeToRefs(mainStore)
+// console.log(entireDepartments.value)
+
+const getDepartmentsName = (id: number) => {
+  const currentDepartment = entireDepartments.value.find((v) => {
+    return v.id === id
+  })
+  // console.log(currentDepartment)
+  if (currentDepartment) return currentDepartment?.name
+}
+// console.log(getDepartmentsName(1))
+
 const emit = defineEmits(['newClick', 'editClick'])
 
-fetchUserListData()
-const { userList, userTotalCount } = storeToRefs(systemStore)
+fetchPageListData()
+const { pageList, pageTotalCount } = storeToRefs(systemStore)
 // console.log(userTotsalCount)
 
 function handleCurrentChange() {
   // console.log(currentPage.value)
-  fetchUserListData()
+  fetchPageListData()
 }
 function handleSizeChange() {
   // console.log(pageSize.value)
-  fetchUserListData()
+  fetchPageListData()
 }
-function fetchUserListData(formData: any = {}) {
+function fetchPageListData(formData: any = {}) {
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
   const pageInfo = { size, offset }
   const queryInfo = { ...pageInfo, ...formData }
-  systemStore.postUserListAction(queryInfo)
+  systemStore.postPageListAction(pageName, queryInfo)
 }
 
 function handleDeleteBtnClick(id: number) {
   // console.log('object :>> ', id)
-  systemStore.deleteUserByIdAction(id).then((params) => {
+  systemStore.deletePageByIdAction(pageName, id).then((params) => {
     // console.log('-------')
 
-    fetchUserListData()
+    fetchPageListData()
   })
 }
 
@@ -105,7 +117,7 @@ function handleEditBtnClick(itemData: any) {
 function handleNewUserClick() {
   emit('newClick')
 }
-defineExpose({ fetchUserListData })
+defineExpose({ fetchPageListData })
 </script>
 
 <style lang="less" scoped>

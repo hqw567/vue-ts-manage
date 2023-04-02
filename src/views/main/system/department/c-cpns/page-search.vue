@@ -3,27 +3,12 @@
     <el-form ref="searchFormRef" label-width="80px" :model="searchForm">
       <el-row :gutter="30">
         <el-col :span="8">
-          <el-form-item label="用户名" prop="name">
+          <el-form-item label="部门名称" prop="name">
             <el-input v-model="searchForm.name" /> </el-form-item
         ></el-col>
         <el-col :span="8">
-          <el-form-item label="真实姓名" prop="realname">
-            <el-input v-model="searchForm.realname" /> </el-form-item
-        ></el-col>
-        <el-col :span="8">
-          <el-form-item label="手机号码" prop="cellphone">
-            <el-input v-model="searchForm.cellphone" /> </el-form-item
-        ></el-col>
-        <el-col :span="8">
-          <el-form-item label="状态" prop="enable">
-            <el-select
-              style="width: 100%"
-              placeholder="请选择状态"
-              v-model="searchForm.enable"
-            >
-              <el-option label="启用" value="1" />
-              <el-option label="禁用" value="0" />
-            </el-select> </el-form-item
+          <el-form-item label="部门领导" prop="leader">
+            <el-input v-model="searchForm.leader" /> </el-form-item
         ></el-col>
         <el-col :span="8">
           <el-form-item label="创建时间" prop="createAt">
@@ -57,16 +42,14 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormInstance } from 'element-plus'
 
 const emit = defineEmits(['queryClick', 'resetClick'])
 
 const searchForm = reactive({
   name: '',
-  cellphone: '',
-  enable: '',
   createAt: '',
-  realname: ''
+  leader: ''
 })
 const searchFormRef = ref<FormInstance>()
 const resetForm = (formEl: FormInstance | undefined) => {

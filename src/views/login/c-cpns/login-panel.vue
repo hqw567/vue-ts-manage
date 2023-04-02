@@ -28,7 +28,7 @@
 
     <div class="control">
       <el-checkbox v-model="isRemPwd" label="记住密码"></el-checkbox>
-      <el-link type="primary">忘记密码</el-link>
+      <el-button link>忘记密码</el-button>
     </div>
 
     <el-button

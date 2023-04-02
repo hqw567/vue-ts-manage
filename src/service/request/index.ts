@@ -59,6 +59,7 @@ class HYRequest {
       // console.log('---------')
 
       config = config.interceptors.requestSuccessFn(config)
+      // console.log(config)
     }
 
     // 返回Promise
