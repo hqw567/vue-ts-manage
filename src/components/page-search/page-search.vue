@@ -2,30 +2,30 @@
   <div class="user-search">
     <el-form ref="searchFormRef" label-width="80px" :model="searchForm">
       <el-row :gutter="30">
-        <el-col :span="8">
-          <el-form-item label="部门名称" prop="name">
-            <el-input v-model="searchForm.name" /> </el-form-item
-        ></el-col>
-        <el-col :span="8">
-          <el-form-item label="部门领导" prop="leader">
-            <el-input
-              v-model="searchForm.leader"
-              placeholder=""
-            /> </el-form-item
-        ></el-col>
-        <el-col :span="8">
-          <el-form-item label="创建时间" prop="createAt">
-            <el-date-picker
-              v-model="searchForm.createAt"
-              type="daterange"
-              unlink-panels
-              range-separator="-"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间"
-              size="large"
-              :shortcuts="shortcuts"
-            /> </el-form-item
-        ></el-col>
+        <template v-for="item in searchConfig.formItems" :key="item.prop">
+          <el-col :span="8">
+            <el-form-item :prop="item.prop" :label="item.label">
+              <template v-if="item.type === 'input'">
+                <el-input
+                  :placeholder="item.placeholder"
+                  v-model="searchForm[item.prop]"
+                ></el-input>
+              </template>
+              <template v-if="item.type === 'date-picker'">
+                <el-date-picker
+                  v-model="searchForm[item.prop]"
+                  type="daterange"
+                  unlink-panels
+                  range-separator="-"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  size="large"
+                  :shortcuts="shortcuts"
+                />
+              </template>
+            </el-form-item>
+          </el-col>
+        </template>
       </el-row>
     </el-form>
     <div class="search-btn">
@@ -47,13 +47,28 @@
 import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 
+interface IProps {
+  searchConfig: {
+    pageName: string
+    formItems: any[]
+  }
+}
 const emit = defineEmits(['queryClick', 'resetClick'])
 
-const searchForm = reactive({
-  name: '',
-  createAt: '',
-  leader: ''
-})
+const props = defineProps<IProps>()
+// console.log(props.config.formItems)
+// const formItems = config.formItems
+
+const initialForm: any = {}
+for (const item of props.searchConfig.formItems) {
+  // console.log(item)
+
+  initialForm[item.prop] = item.initialValue ?? ''
+}
+console.log(initialForm)
+
+let searchForm = reactive(initialForm)
+
 const searchFormRef = ref<FormInstance>()
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -64,8 +79,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log('submit!')
-      // console.log(searchForm)
       emit('queryClick', searchForm)
     } else {
       console.log('error submit!', fields)

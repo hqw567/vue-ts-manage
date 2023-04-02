@@ -1,6 +1,7 @@
 <template>
   <div class="department">
     <page-search
+      :search-config="searchConfig"
       @reset-click="handleResetClick"
       @query-click="handleQueryClick"
     />
@@ -14,11 +15,11 @@
 </template>
 
 <script setup lang="ts" name="department">
-import pageSearch from './c-cpns/page-search.vue'
+import pageSearch from '@/components/page-search/page-search.vue'
 import pageModal from './c-cpns/page-modal.vue'
 import pageContent from './c-cpns/page-content.vue'
 import { ref } from 'vue'
-
+import searchConfig from './config/search.config'
 const contentRef = ref<InstanceType<typeof pageContent>>()
 const modalRef = ref<InstanceType<typeof pageModal>>()
 function handleResetClick() {
