@@ -15,24 +15,64 @@
         {{ getDepartmentsName(scope.row[scope.prop]) }}
       </template>
     </page-content>
-    <page-modal ref="modalRef" @refresh-data="handleResetClick" />
+    <page-modal
+      ref="modalRef"
+      @refresh-data="handleResetClick"
+      :modal-config="modalConfig"
+    >
+    </page-modal>
   </div>
 </template>
 
 <script setup lang="ts" name="department">
 import pageSearch from '@/components/page-search/page-search.vue'
-import pageModal from './c-cpns/page-modal.vue'
+import pageModal from '@/components/page-modal/page-modal.vue'
 import pageContent from '@/components/page-content/page-content.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import searchConfig from './config/search.config'
 import contentConfig from './config/content.config'
-import useMainStore from '@/store/main/main'
+import modalConfig from './config/modal.config'
+
 import { storeToRefs } from 'pinia'
+import useMainStore from '@/store/main/main'
 const contentRef = ref<InstanceType<typeof pageContent>>()
 const modalRef = ref<InstanceType<typeof pageModal>>()
 // import { storeToRefs } from 'pinia'
 // import useMainStore from '@/store/main/main'
+const mainStore = useMainStore()
+// console.log(mainStore, 'useMainStore()')
 
+// console.log(mainStore)
+
+const { entireDepartments } = storeToRefs(mainStore)
+// console.log(modalConfig.formItems)
+
+function modalConfigAddParentOptions() {
+  const departmentsMap = mainStore.entireDepartments.map((item) => {
+    return {
+      label: item.name,
+      value: item.id
+    }
+  })
+  const options: any = []
+  modalConfig.formItems.forEach((item) => {
+    if (item.prop === 'parentId') {
+      options.push(...departmentsMap)
+    }
+  })
+
+  const parentIndex = modalConfig.formItems.findIndex(
+    (item) => item.prop === 'parentId'
+  )
+  modalConfig.formItems[parentIndex].options = options
+  return modalConfig
+}
+// modalConfigRef()
+modalConfigAddParentOptions()
+function ss() {
+  console.log('sss')
+}
+ss()
 function handleResetClick() {
   // console.log('handleResetClick :>> ', '----------------------')
   contentRef.value?.fetchPageListData()
@@ -47,10 +87,6 @@ function handleNewBtnClick() {
 function handleEditBtnClick(itemData: any) {
   modalRef.value?.setModalVisible(false, itemData)
 }
-
-const mainStore = useMainStore()
-
-const { entireDepartments } = storeToRefs(mainStore)
 
 const getDepartmentsName = (id: number) => {
   const currentDepartment = entireDepartments.value.find((v) => {
