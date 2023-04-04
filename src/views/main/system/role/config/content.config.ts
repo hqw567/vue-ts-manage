@@ -29,13 +29,6 @@ const contentConfig = {
       width: '150px'
     },
     {
-      type: 'custom',
-      slotName: 'parentId',
-      prop: 'parentId',
-      label: '上级角色',
-      width: '150px'
-    },
-    {
       type: 'timer',
       prop: 'createAt',
       label: '创建时间'

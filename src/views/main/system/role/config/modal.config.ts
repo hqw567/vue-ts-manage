@@ -1,26 +1,26 @@
 const modalConfig = {
   pageName: 'role',
   header: {
-    newTitle: '新增部门',
-    editTitle: '编辑部门'
+    newTitle: '新增角色',
+    editTitle: '编辑角色'
   },
   formItems: [
     {
       prop: 'name',
       label: '角色名称',
-      placeholder: '请输入部门名称',
+      placeholder: '请输入角色名称',
       type: 'input'
     },
     {
       prop: 'intro',
       label: '权限介绍',
-      placeholder: '请输入部门领导',
+      placeholder: '请输入角色领导',
       type: 'input'
     },
     {
       prop: 'parentId',
-      label: '上级部门',
-      placeholder: '请选择上级部门',
+      label: '上级角色',
+      placeholder: '请选择上级角色',
       type: 'select',
       options: []
     }

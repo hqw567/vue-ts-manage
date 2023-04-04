@@ -28,20 +28,23 @@
 import pageSearch from '@/components/page-search/page-search.vue'
 import pageModal from '@/components/page-modal/page-modal.vue'
 import pageContent from '@/components/page-content/page-content.vue'
-import { ref } from 'vue'
 import searchConfig from './config/search.config'
 import contentConfig from './config/content.config'
 import modalConfig from './config/modal.config'
-
 import { storeToRefs } from 'pinia'
 import useMainStore from '@/store/main/main'
+import usePageContent from '@/hooks/usePageContent'
+import usePageModal from '@/hooks/usePageModal'
 
-const contentRef = ref<InstanceType<typeof pageContent>>()
-const modalRef = ref<InstanceType<typeof pageModal>>()
 const mainStore = useMainStore()
 
 const { entireDepartments } = storeToRefs(mainStore)
-
+const getDepartmentsName = (id: number) => {
+  const currentDepartment = entireDepartments.value.find((v) => {
+    return v.id === id
+  })
+  if (currentDepartment) return currentDepartment?.name
+}
 function modalConfigAddParentOptions() {
   const departmentsMap = mainStore.entireDepartments.map((item) => {
     return {
@@ -64,25 +67,9 @@ function modalConfigAddParentOptions() {
 }
 modalConfigAddParentOptions()
 
-function handleResetClick() {
-  contentRef.value?.fetchPageListData()
-}
-function handleQueryClick(searchForm: any) {
-  contentRef.value?.fetchPageListData(searchForm)
-}
-function handleNewBtnClick() {
-  modalRef.value?.setModalVisible()
-}
-function handleEditBtnClick(itemData: any) {
-  modalRef.value?.setModalVisible(false, itemData)
-}
+const { contentRef, handleResetClick, handleQueryClick } = usePageContent()
 
-const getDepartmentsName = (id: number) => {
-  const currentDepartment = entireDepartments.value.find((v) => {
-    return v.id === id
-  })
-  if (currentDepartment) return currentDepartment?.name
-}
+const { modalRef, handleNewBtnClick, handleEditBtnClick } = usePageModal()
 </script>
 
 <style scoped>
