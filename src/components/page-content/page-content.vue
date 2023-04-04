@@ -79,9 +79,10 @@ const mainStore = useMainStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
 const newModal = ref(false)
-const pageName = 'department'
+
 interface IProps {
   contentConfig: {
+    pageName: string
     header?: {
       title?: string
       btnTitle?: string
@@ -90,6 +91,8 @@ interface IProps {
   }
 }
 const props = defineProps<IProps>()
+const pageName = props.contentConfig.pageName
+
 const { entireDepartments } = storeToRefs(mainStore)
 // console.log(entireDepartments.value)
 

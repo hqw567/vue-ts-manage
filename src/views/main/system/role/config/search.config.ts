@@ -1,5 +1,5 @@
 const searchConfig = {
-  pageName: 'department',
+  pageName: 'role',
   formItems: [
     {
       prop: 'name',
@@ -8,7 +8,7 @@ const searchConfig = {
       type: 'input'
     },
     {
-      prop: 'leader',
+      prop: 'intro',
       label: '权限介绍',
       placeholder: '请输入角色介绍',
       type: 'input'

@@ -61,7 +61,7 @@ interface IProps {
   }
 }
 const props = defineProps<IProps>()
-const initialForm: any = {}
+const initialForm: any = { id: null }
 
 for (const item of props.modalConfig.formItems) {
   initialForm[item.prop] = ''
@@ -91,6 +91,7 @@ function setModalVisible(isNew: boolean = true, itemData?: any) {
       form[key] = itemData[key]
     }
     editData.value = itemData
+    console.log(itemData)
   } else {
     for (const key in form) {
       form[key] = ''
@@ -108,9 +109,11 @@ function handleConfirm() {
     })
   } else {
     const editForm = form
+    // console.log(form)
+
     delete editForm.updateAt
     delete editForm.createAt
-    console.log(editForm)
+    // console.log(editForm, 'editForm')
     systemStore
       .editPageDataAction(pageName, editForm.id, editForm)
       .then((params) => {
