@@ -18,11 +18,8 @@ const modalConfig = {
       type: 'input'
     },
     {
-      prop: 'parentId',
-      label: '上级角色',
-      placeholder: '请选择上级角色',
-      type: 'select',
-      options: []
+      type: 'custom',
+      slotName: 'tree'
     }
   ]
 }

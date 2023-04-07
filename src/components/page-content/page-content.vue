@@ -9,7 +9,12 @@
         contentConfig?.header?.btnTitle ?? '新增数据'
       }}</el-button>
     </div>
-    <el-table :data="pageList" border style="width: 100%; text-align: center">
+    <el-table
+      :data="pageList"
+      border
+      style="width: 100%; text-align: center"
+      v-bind="contentConfig?.childrenTree"
+    >
       <template v-for="item in contentConfig.propsList" :key="item.prop">
         <template v-if="item.type === 'timer'">
           <el-table-column align="center" v-bind="item">
@@ -88,6 +93,7 @@ interface IProps {
       btnTitle?: string
     }
     propsList: any[]
+    childrenTree?: any
   }
 }
 const props = defineProps<IProps>()

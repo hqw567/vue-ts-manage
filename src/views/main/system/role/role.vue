@@ -15,7 +15,9 @@
       ref="modalRef"
       @refresh-data="handleResetClick"
       :modal-config="modalConfig"
-    ></pageModal>
+    >
+      <template #tree>213213</template>
+    </pageModal>
   </div>
 </template>
 
