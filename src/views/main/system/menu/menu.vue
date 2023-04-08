@@ -30,9 +30,12 @@ import contentConfig from './config/content.config'
 import modalConfig from './config/modal.config'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
+
 const { contentRef, handleResetClick, handleQueryClick } = usePageContent()
 
 const { modalRef, handleNewBtnClick, handleEditBtnClick } = usePageModal()
+
+console.log()
 </script>
 
 <style scoped>

@@ -7,6 +7,7 @@ export interface ILoginState {
   token: string
   userInfo: UserInfo
   userMenus: IUserMenus[]
+  userPermissions: string[]
 }
 
 export interface UserInfo {

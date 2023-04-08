@@ -1,28 +1,28 @@
 const modalConfig = {
   pageName: 'department',
   header: {
-    newTitle: '新增部门',
-    editTitle: '编辑部门'
+    newTitle: '新增菜单',
+    editTitle: '编辑菜单'
   },
   formItems: [
     {
       prop: 'name',
-      label: '部门名称',
-      placeholder: '请输入部门名称',
+      label: '菜单名称',
+      placeholder: '请输入菜单名称',
       type: 'input'
     },
     {
-      prop: 'leader',
-      label: '部门领导',
-      placeholder: '请输入部门领导',
+      prop: 'permission',
+      label: '菜单权限介绍',
+      placeholder: '请输入菜单权限介绍',
       type: 'input'
     },
     {
-      prop: 'parentId',
-      label: '上级部门',
-      placeholder: '请选择上级部门',
-      type: 'select',
-      options: []
+      prop: 'menulist',
+      label: '权限选择',
+      placeholder: '请选择权限',
+      slotName: 'tree',
+      type: 'custom'
     }
   ]
 }

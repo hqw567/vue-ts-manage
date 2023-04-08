@@ -10,15 +10,15 @@ import { localCache } from '@/utils/cache'
 import router from '../../router/index'
 
 import { LOGIN_TOKEN } from '@/global/constants'
-import type { RouteRecordRaw } from 'vue-router'
-import { mapMenusToRoutes } from '@/utils/map-menus'
+import { mapMenusToRoutes, mapUserMenuToPermissions } from '@/utils/map-menus'
 import useMainStore from '../main/main'
 
 export const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
     token: '',
     userInfo: {},
-    userMenus: []
+    userMenus: [],
+    userPermissions: []
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
@@ -34,32 +34,15 @@ export const useLoginStore = defineStore('login', {
 
       const userMenusResult = await getUserMenusByRoleIds(userInfo.role.id)
       this.userMenus = userMenusResult.data
+      this.userPermissions = mapUserMenuToPermissions(this.userMenus)
 
       localCache.setCache('userInfo', userInfo)
       localCache.setCache('userMenus', this.userMenus)
-      // console.log(this.userMenus)
 
-      // console.log(files, 'files')
-
-      // for (const key in files) {
-      //   const module: any = files[key]
-      //   this.userMenus.forEach((v) => {
-      //     if (v.children) {
-      //       v.children.forEach((sub) => {
-      //         if (sub.url.includes(module.default.path)) {
-      //           router.addRoute('main', module.default)
-      //         }
-      //       })
-      //     }
-      //   })
-      // }
-
-      // console.log(router, 'router')
       const mainStore = useMainStore()
       mainStore.fetchEntireDataAction()
 
       const routes = mapMenusToRoutes(this.userMenus)
-      // console.log(routes)
 
       routes.forEach((route) => router.addRoute('main', route))
 
@@ -73,6 +56,7 @@ export const useLoginStore = defineStore('login', {
         this.token = token
         this.userInfo = userInfo
         this.userMenus = userMenus
+        this.userPermissions = mapUserMenuToPermissions(this.userMenus)
 
         const mainStore = useMainStore()
         mainStore.fetchEntireDataAction()
@@ -82,7 +66,6 @@ export const useLoginStore = defineStore('login', {
       } else {
         router.push('/login')
       }
-      // console.log(routes)
     }
   }
 })

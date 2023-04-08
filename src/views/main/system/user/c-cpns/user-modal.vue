@@ -109,6 +109,7 @@ function handleConfirm() {
     const editForm = form
     delete editForm.updateAt
     delete editForm.createAt
+    delete editForm.password
     console.log(editForm)
     systemStore.editUserDataAction(editForm.id, editForm).then((params) => {
       emit('refreshData')

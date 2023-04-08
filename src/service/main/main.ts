@@ -14,3 +14,13 @@ export function getEntireDepartments() {
     }
   })
 }
+
+export function getEntireMenus() {
+  return hyRequest.post({
+    url: '/menu/list',
+    data: {
+      offset: 0,
+      size: 999
+    }
+  })
+}

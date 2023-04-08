@@ -5,7 +5,7 @@
         {{ contentConfig?.header?.title ?? '数据列表' }}
       </div>
 
-      <el-button type="primary" @click="handleNewUserClick">{{
+      <el-button v-if="isCreate" type="primary" @click="handleNewUserClick">{{
         contentConfig?.header?.btnTitle ?? '新增数据'
       }}</el-button>
     </div>
@@ -24,15 +24,21 @@
           </el-table-column>
         </template>
         <template v-else-if="item.type === 'handler'">
-          <el-table-column align="center" v-bind="item">
+          <el-table-column
+            align="center"
+            v-bind="item"
+            v-if="isUpdate || isDelete"
+          >
             <template #default="scope">
               <el-button
+                v-if="isUpdate"
                 type="primary"
                 @click="handleEditBtnClick(scope.row)"
                 link
                 >编辑</el-button
               >
               <el-button
+                v-if="isDelete"
                 link
                 type="danger"
                 @click="handleDeleteBtnClick(scope.row.id)"
@@ -61,8 +67,8 @@
       <el-pagination
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
-        :page-sizes="[10, 20, 30, 40]"
         layout="total, sizes, prev, pager, next, jumper"
+        :page-sizes="[10, 20, 30, 40, 50, 100]"
         :total="pageTotalCount"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -78,13 +84,20 @@ import useSystemStore from '@/store/main/system/system'
 import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
 import useMainStore from '@/store/main/main'
-
+import { usePermissions } from '@/hooks/usePermissions'
 const systemStore = useSystemStore()
 const mainStore = useMainStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
 const newModal = ref(false)
 
+systemStore.$onAction(({ name, after }) => {
+  after(() => {
+    if (name === 'newPageDataAction') {
+      currentPage.value = 1
+    }
+  })
+})
 interface IProps {
   contentConfig: {
     pageName: string
@@ -98,6 +111,10 @@ interface IProps {
 }
 const props = defineProps<IProps>()
 const pageName = props.contentConfig.pageName
+const isQuery = usePermissions(`${pageName}:query`)
+const isCreate = usePermissions(`${pageName}:create`)
+const isUpdate = usePermissions(`${pageName}:update`)
+const isDelete = usePermissions(`${pageName}:delete`)
 
 const { entireDepartments } = storeToRefs(mainStore)
 // console.log(entireDepartments.value)
@@ -115,23 +132,33 @@ const emit = defineEmits(['newClick', 'editClick'])
 
 fetchPageListData()
 const { pageList, pageTotalCount } = storeToRefs(systemStore)
-console.log(pageList)
+// console.log(pageTotalCount.value, 'pageTotalCount')
 
 // console.log(userTotsalCount)
-
+let searchForm = {}
 function handleCurrentChange() {
   // console.log(currentPage.value)
-  fetchPageListData()
+  fetchPageListData(searchForm)
 }
 function handleSizeChange() {
   // console.log(pageSize.value)
   fetchPageListData()
 }
-function fetchPageListData(formData: any = {}) {
+
+function fetchPageListData(formData: any = {}, isSearch: boolean = false) {
+  if (!isQuery) return
+  // currentPage.value = 1
+  if (isSearch) {
+    currentPage.value = 1
+    searchForm = formData
+  }
+  // searchForm = {}
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
   const pageInfo = { size, offset }
   const queryInfo = { ...pageInfo, ...formData }
+  // console.log('queryInfo', queryInfo)
+
   systemStore.postPageListAction(pageName, queryInfo)
 }
 

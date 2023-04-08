@@ -65,7 +65,6 @@ for (const item of props.searchConfig.formItems) {
 
   initialForm[item.prop] = item.initialValue ?? ''
 }
-console.log(initialForm)
 
 let searchForm = reactive(initialForm)
 

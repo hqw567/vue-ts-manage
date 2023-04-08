@@ -60,3 +60,47 @@ export function mapPathToBreadcrumbs(path: string, userMenus: any[]) {
   }
   return breadCrumbs
 }
+
+/**
+ * @description: 映射所有id
+ * @param {any} menuList
+ * @return {*}
+ * @author: Herway
+ */
+export function mapMenuListToIds(menuList: any[]) {
+  let menuListAllId: number[] = []
+  function traverseMenuList(menus: any[]) {
+    //
+    menus.forEach((menu: any) => {
+      if (menu.children) {
+        traverseMenuList(menu.children)
+      } else {
+        menuListAllId.push(menu.id)
+      }
+    })
+  }
+  traverseMenuList(menuList)
+
+  return menuListAllId
+}
+
+/**
+ * @description: 映射所有用户按钮权限
+ * @param {any} userMenus
+ * @return {*}
+ * @author: Herway
+ */
+export function mapUserMenuToPermissions(userMenus: any[]) {
+  let permissions: string[] = []
+  function traverseUserMenu(menus: any[]) {
+    for (const item of menus) {
+      if (item.type === 3) {
+        permissions.push(item.permission)
+      } else {
+        traverseUserMenu(item.children ?? [])
+      }
+    }
+  }
+  traverseUserMenu(userMenus)
+  return permissions
+}

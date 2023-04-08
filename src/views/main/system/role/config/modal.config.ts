@@ -18,8 +18,10 @@ const modalConfig = {
       type: 'input'
     },
     {
-      type: 'custom',
-      slotName: 'tree'
+      label: '权限选择',
+      placeholder: '请选择权限',
+      slotName: 'tree',
+      type: 'custom'
     }
   ]
 }

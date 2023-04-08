@@ -7,7 +7,7 @@
       "
       width="30%"
     >
-      <el-form :model="form" label-width="80px" ref="formRef">
+      <el-form :model="form" label-width="100px" ref="formRef">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
           <el-form-item v-bind="item">
             <template v-if="item.type === 'input'">
@@ -62,6 +62,7 @@ interface IProps {
     }
     formItems: any[]
   }
+  otherInfo?: any
 }
 const props = defineProps<IProps>()
 const initialForm: any = { id: null }
@@ -90,11 +91,13 @@ function setModalVisible(isNew: boolean = true, itemData?: any) {
     form[key] = ''
   }
   if (!isNew && itemData) {
+    // console.log(itemData)
+
     for (const key in form) {
       form[key] = itemData[key]
     }
     editData.value = itemData
-    console.log(itemData)
+    // console.log(itemData)
   } else {
     for (const key in form) {
       form[key] = ''
@@ -106,19 +109,23 @@ function handleCancel() {
   dialogFormVisible.value = false
 }
 function handleConfirm() {
+  let allData = form
+
+  if (props.otherInfo) {
+    allData = { ...form, ...props.otherInfo }
+  }
+  delete allData.updateAt
+  delete allData.createAt
   if (isNewRef.value) {
-    systemStore.newPageDataAction(pageName, form).then((params) => {
+    systemStore.newPageDataAction(pageName, allData).then((params) => {
       emit('refreshData')
     })
   } else {
-    const editForm = form
     // console.log(form)
 
-    delete editForm.updateAt
-    delete editForm.createAt
     // console.log(editForm, 'editForm')
     systemStore
-      .editPageDataAction(pageName, editForm.id, editForm)
+      .editPageDataAction(pageName, allData.id, allData)
       .then((params) => {
         emit('refreshData')
       })

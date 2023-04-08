@@ -3,14 +3,14 @@ const searchConfig = {
   formItems: [
     {
       prop: 'name',
-      label: '部门名称',
-      placeholder: '请输入部门名称',
+      label: '菜单名称',
+      placeholder: '请输入菜单名称',
       type: 'input'
     },
     {
-      prop: 'leader',
-      label: '部门领导',
-      placeholder: '请输入部门领导',
+      prop: 'permission',
+      label: '菜单权限',
+      placeholder: '请输入菜单权限',
       type: 'input'
     },
     {
