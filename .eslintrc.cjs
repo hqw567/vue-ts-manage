@@ -10,6 +10,7 @@ module.exports = {
   root: true,
   extends: [
     'eslint:recommended', // 使用eslint推荐的语法规范
+    'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:prettier/recommended'
   ],
@@ -26,6 +27,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/multi-word-component-names': 'off',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': [2]
+    '@typescript-eslint/no-unused-vars': ['error']
   }
 }
