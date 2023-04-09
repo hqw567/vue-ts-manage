@@ -117,16 +117,18 @@ function handleConfirm() {
   delete allData.updateAt
   delete allData.createAt
   if (isNewRef.value) {
-    systemStore.newPageDataAction(pageName, allData).then(() => {
+    systemStore.newPageDataAction(pageName.value, allData).then(() => {
       emit('refreshData')
     })
   } else {
     // console.log(form)
 
     // console.log(editForm, 'editForm')
-    systemStore.editPageDataAction(pageName, allData.id, allData).then(() => {
-      emit('refreshData')
-    })
+    systemStore
+      .editPageDataAction(pageName.value, allData.id, allData)
+      .then(() => {
+        emit('refreshData')
+      })
   }
 
   dialogFormVisible.value = false

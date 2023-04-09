@@ -159,12 +159,12 @@ function fetchPageListData(formData: any = {}, isSearch = false) {
   const queryInfo = { ...pageInfo, ...formData }
   // console.log('queryInfo', queryInfo)
 
-  systemStore.postPageListAction(pageName, queryInfo)
+  systemStore.postPageListAction(pageName.value, queryInfo)
 }
 
 function handleDeleteBtnClick(id: number) {
   // console.log('object :>> ', id)
-  systemStore.deletePageByIdAction(pageName, id).then(() => {
+  systemStore.deletePageByIdAction(pageName.value, id).then(() => {
     // console.log('-------')
 
     fetchPageListData()

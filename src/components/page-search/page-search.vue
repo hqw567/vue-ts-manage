@@ -2,7 +2,7 @@
   <div class="user-search">
     <el-form ref="searchFormRef" label-width="80px" :model="searchForm">
       <el-row :gutter="30">
-        <div v-for="item in searchConfig.formItems" :key="item.prop">
+        <template v-for="item in searchConfig.formItems" :key="item.prop">
           <el-col :span="8">
             <el-form-item :prop="item.prop" :label="item.label">
               <template v-if="item.type === 'input'">
@@ -25,7 +25,7 @@
               </template>
             </el-form-item>
           </el-col>
-        </div>
+        </template>
       </el-row>
     </el-form>
     <div class="search-btn">
