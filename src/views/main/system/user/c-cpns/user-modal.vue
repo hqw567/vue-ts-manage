@@ -78,7 +78,7 @@ const systemStore = useSystemStore()
 
 const { entireRoles, entireDepartments } = storeToRefs(mainStore)
 const emit = defineEmits(['refreshData'])
-function setModalVisible(isNew: boolean = true, itemData?: any) {
+function setModalVisible(isNew = true, itemData?: any) {
   console.log(itemData)
 
   dialogFormVisible.value = true

@@ -1,6 +1,6 @@
 <template>
   <div class="map-echarts">
-    <BaseEcharts :option="option" :registerMap="registerMap"></BaseEcharts>
+    <BaseEcharts :option="option" :register-map="registerMap"></BaseEcharts>
   </div>
 </template>
 

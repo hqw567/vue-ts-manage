@@ -8,7 +8,7 @@
     <el-row :gutter="10">
       <el-col :span="8">
         <echarts-card>
-          <PieEcharts :pieData="showGoodsCategoryCount"></PieEcharts>
+          <PieEcharts :pie-data="showGoodsCategoryCount"></PieEcharts>
         </echarts-card>
       </el-col>
       <el-col :span="8">

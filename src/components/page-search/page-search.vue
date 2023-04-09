@@ -2,7 +2,7 @@
   <div class="user-search">
     <el-form ref="searchFormRef" label-width="80px" :model="searchForm">
       <el-row :gutter="30">
-        <template v-for="item in searchConfig.formItems" :key="item.prop">
+        <div v-for="item in searchConfig.formItems" :key="item.prop">
           <el-col :span="8">
             <el-form-item :prop="item.prop" :label="item.label">
               <template v-if="item.type === 'input'">
@@ -25,7 +25,7 @@
               </template>
             </el-form-item>
           </el-col>
-        </template>
+        </div>
       </el-row>
     </el-form>
     <div class="search-btn">
@@ -66,7 +66,7 @@ for (const item of props.searchConfig.formItems) {
   initialForm[item.prop] = item.initialValue ?? ''
 }
 
-let searchForm = reactive(initialForm)
+const searchForm = reactive(initialForm)
 
 const searchFormRef = ref<FormInstance>()
 const resetForm = (formEl: FormInstance | undefined) => {

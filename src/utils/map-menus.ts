@@ -68,7 +68,7 @@ export function mapPathToBreadcrumbs(path: string, userMenus: any[]) {
  * @author: Herway
  */
 export function mapMenuListToIds(menuList: any[]) {
-  let menuListAllId: number[] = []
+  const menuListAllId: number[] = []
   function traverseMenuList(menus: any[]) {
     //
     menus.forEach((menu: any) => {
@@ -91,7 +91,7 @@ export function mapMenuListToIds(menuList: any[]) {
  * @author: Herway
  */
 export function mapUserMenuToPermissions(userMenus: any[]) {
-  let permissions: string[] = []
+  const permissions: string[] = []
   function traverseUserMenu(menus: any[]) {
     for (const item of menus) {
       if (item.type === 3) {

@@ -48,9 +48,9 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import useMainStore from '@/store/main/main'
+// import useMainStore from '@/store/main/main'
 import useSystemStore from '@/store/main/system/system'
-import { storeToRefs } from 'pinia'
+// import { storeToRefs } from 'pinia'
 import type { FormInstance } from 'element-plus'
 
 interface IProps {
@@ -75,14 +75,14 @@ const form = reactive<any>(initialForm)
 const formRef = ref<FormInstance>()
 const dialogFormVisible = ref(false)
 const isNewRef = ref(true)
-const mainStore = useMainStore()
+// const mainStore = useMainStore()
 
 const systemStore = useSystemStore()
-const pageName = props.modalConfig.pageName
+const pageName = ref(props.modalConfig.pageName)
 const editData = ref()
 // const { entireRoles, entireDepartments } = storeToRefs(mainStore)
 const emit = defineEmits(['refreshData'])
-function setModalVisible(isNew: boolean = true, itemData?: any) {
+function setModalVisible(isNew = true, itemData?: any) {
   // console.log(itemData)
 
   dialogFormVisible.value = true
@@ -117,18 +117,16 @@ function handleConfirm() {
   delete allData.updateAt
   delete allData.createAt
   if (isNewRef.value) {
-    systemStore.newPageDataAction(pageName, allData).then((params) => {
+    systemStore.newPageDataAction(pageName, allData).then(() => {
       emit('refreshData')
     })
   } else {
     // console.log(form)
 
     // console.log(editForm, 'editForm')
-    systemStore
-      .editPageDataAction(pageName, allData.id, allData)
-      .then((params) => {
-        emit('refreshData')
-      })
+    systemStore.editPageDataAction(pageName, allData.id, allData).then(() => {
+      emit('refreshData')
+    })
   }
 
   dialogFormVisible.value = false

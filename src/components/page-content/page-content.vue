@@ -145,7 +145,7 @@ function handleSizeChange() {
   fetchPageListData()
 }
 
-function fetchPageListData(formData: any = {}, isSearch: boolean = false) {
+function fetchPageListData(formData: any = {}, isSearch = false) {
   if (!isQuery) return
   // currentPage.value = 1
   if (isSearch) {
