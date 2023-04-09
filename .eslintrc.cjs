@@ -11,6 +11,7 @@ module.exports = {
   extends: [
     'eslint:recommended', // 使用eslint推荐的语法规范
     'plugin:@typescript-eslint/recommended',
+    'plugin:vue/vue3-recommended',
     'prettier',
     'plugin:prettier/recommended'
   ],
@@ -20,7 +21,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module' // 代码的模块化方式，使用module的模块方式
   },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['vue', '@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
