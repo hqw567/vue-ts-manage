@@ -17,9 +17,9 @@
         <el-col :span="8">
           <el-form-item label="状态" prop="enable">
             <el-select
+              v-model="searchForm.enable"
               style="width: 100%"
               placeholder="请选择状态"
-              v-model="searchForm.enable"
             >
               <el-option label="启用" value="1" />
               <el-option label="禁用" value="0" />

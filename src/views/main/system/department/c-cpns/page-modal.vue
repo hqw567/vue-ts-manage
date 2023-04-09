@@ -5,7 +5,7 @@
       :title="isNewRef ? '新增部门' : '编辑部门'"
       width="30%"
     >
-      <el-form :model="form" label-width="80px" ref="formRef">
+      <el-form ref="formRef" :model="form" label-width="80px">
         <el-form-item label="部门名称" prop="name">
           <el-input v-model="form.name" autocomplete="off" />
         </el-form-item>

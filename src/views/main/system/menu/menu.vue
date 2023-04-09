@@ -14,8 +14,8 @@
     </page-content>
     <page-modal
       ref="modalRef"
-      @refresh-data="handleResetClick"
       :modal-config="modalConfig"
+      @refresh-data="handleResetClick"
     >
     </page-modal>
   </div>

@@ -25,16 +25,16 @@
         </template>
         <template v-else-if="item.type === 'handler'">
           <el-table-column
+            v-if="isUpdate || isDelete"
             align="center"
             v-bind="item"
-            v-if="isUpdate || isDelete"
           >
             <template #default="scope">
               <el-button
                 v-if="isUpdate"
                 type="primary"
-                @click="handleEditBtnClick(scope.row)"
                 link
+                @click="handleEditBtnClick(scope.row)"
                 >编辑</el-button
               >
               <el-button
@@ -110,11 +110,11 @@ interface IProps {
   }
 }
 const props = defineProps<IProps>()
-const pageName = props.contentConfig.pageName
-const isQuery = usePermissions(`${pageName}:query`)
-const isCreate = usePermissions(`${pageName}:create`)
-const isUpdate = usePermissions(`${pageName}:update`)
-const isDelete = usePermissions(`${pageName}:delete`)
+const pageName = ref(props.contentConfig.pageName)
+const isQuery = usePermissions(`${pageName.value}:query`)
+const isCreate = usePermissions(`${pageName.value}:create`)
+const isUpdate = usePermissions(`${pageName.value}:update`)
+const isDelete = usePermissions(`${pageName.value}:delete`)
 
 // const { entireDepartments } = storeToRefs(mainStore)
 // console.log(entireDepartments.value)

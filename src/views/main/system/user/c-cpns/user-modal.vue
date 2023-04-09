@@ -5,7 +5,7 @@
       :title="isNewRef ? '新增用户' : '编辑用户'"
       width="30%"
     >
-      <el-form :model="form" label-width="80px" ref="formRef">
+      <el-form ref="formRef" :model="form" label-width="80px">
         <el-form-item label="用户名" prop="name">
           <el-input v-model="form.name" autocomplete="off" />
         </el-form-item>
@@ -16,7 +16,7 @@
             placeholder="请输入真实姓名"
           />
         </el-form-item>
-        <el-form-item label="密码" prop="password" v-if="isNewRef">
+        <el-form-item v-if="isNewRef" label="密码" prop="password">
           <el-input
             v-model="form.password"
             type="password"
@@ -25,18 +25,18 @@
           />
         </el-form-item>
         <el-form-item label="手机号码" prop="cellphone">
-          <el-input autocomplete="off" v-model="form.cellphone" />
+          <el-input v-model="form.cellphone" autocomplete="off" />
         </el-form-item>
         <el-form-item label="选择角色" prop="roleId">
-          <el-select style="width: 100%" v-model="form.roleId">
-            <template v-for="item in entireRoles">
+          <el-select v-model="form.roleId" style="width: 100%">
+            <template v-for="item in entireRoles" :key="item.id">
               <el-option :label="item.name" :value="item.id" />
             </template>
           </el-select>
         </el-form-item>
         <el-form-item label="选择部门" prop="departmentId">
-          <el-select style="width: 100%" v-model="form.departmentId">
-            <template v-for="item in entireDepartments">
+          <el-select v-model="form.departmentId" style="width: 100%">
+            <template v-for="item in entireDepartments" :key="item.id">
               <el-option :label="item.name" :value="item.id" />
             </template>
           </el-select>

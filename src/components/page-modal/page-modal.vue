@@ -7,19 +7,19 @@
       "
       width="30%"
     >
-      <el-form :model="form" label-width="100px" ref="formRef">
+      <el-form ref="formRef" :model="form" label-width="100px">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
           <el-form-item v-bind="item">
             <template v-if="item.type === 'input'">
               <el-input
-                :placeholder="item.placeholder"
                 v-model="form[item.prop]"
+                :placeholder="item.placeholder"
               ></el-input>
             </template>
             <template v-else-if="item.type === 'select'">
               <el-select
-                :placeholder="item.placeholder"
                 v-model="form[item.prop]"
+                :placeholder="item.placeholder"
                 style="width: 100%"
               >
                 <el-option

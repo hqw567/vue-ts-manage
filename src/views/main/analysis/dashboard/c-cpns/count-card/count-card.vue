@@ -9,12 +9,12 @@
               <el-icon><Warning /></el-icon>
             </el-tooltip>
           </div>
-          <div class="c-count" ref="count1Ref">{{ number1 }}</div>
+          <div ref="count1Ref" class="c-count">{{ number1 }}</div>
         </div>
       </template>
       <div class="footer">
         <span>{{ subtitle }}</span>
-        <span class="b-count" ref="count2Ref">{{ number2 }}</span>
+        <span ref="count2Ref" class="b-count">{{ number2 }}</span>
       </div>
     </el-card>
   </div>
@@ -45,10 +45,12 @@ const countOption = {
   prefix: props.amount === 'saleroom' ? '￥' : ''
 }
 onMounted(() => {
-  const countup1 = new CountUp(count1Ref.value!, props.number1, countOption)
-  const countup2 = new CountUp(count2Ref.value!, props.number2, countOption)
-  countup1.start()
-  countup2.start()
+  if (count1Ref.value && count2Ref.value) {
+    const countup1 = new CountUp(count1Ref.value, props.number1, countOption)
+    const countup2 = new CountUp(count2Ref.value, props.number2, countOption)
+    countup1.start()
+    countup2.start()
+  }
 })
 </script>
 

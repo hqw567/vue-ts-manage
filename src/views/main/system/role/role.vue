@@ -13,9 +13,9 @@
     ></pageContent>
     <pageModal
       ref="modalRef"
-      @refresh-data="handleResetClick"
       :modal-config="modalConfig"
       :other-info="otherInfo"
+      @refresh-data="handleResetClick"
     >
       <template #tree>
         <el-tree

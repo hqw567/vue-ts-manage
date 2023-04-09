@@ -32,10 +32,10 @@
     </div>
 
     <el-button
-      @click="handleLoginBtnClick"
       type="primary"
       size="large"
       class="login-btn"
+      @click="handleLoginBtnClick"
       >立即登录</el-button
     >
   </div>

@@ -13,9 +13,9 @@
       </el-form-item>
       <el-form-item prop="password" label="密码">
         <el-input
+          v-model="account.password"
           show-password
           type="password"
-          v-model="account.password"
           autocomplete="off"
         />
       </el-form-item>

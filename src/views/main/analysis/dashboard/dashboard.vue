@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <el-row :gutter="10">
-      <el-col :span="6" v-for="item in amountList" :key="item.amount">
+      <el-col v-for="item in amountList" :key="item.amount" :span="6">
         <count-card v-bind="item"></count-card>
       </el-col>
     </el-row>

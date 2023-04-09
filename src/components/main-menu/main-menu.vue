@@ -10,7 +10,7 @@
       class="el-menu-vertical-demo"
       :collapse="isFold"
     >
-      <el-sub-menu :index="item.url" v-for="item in userMenus" :key="item.id">
+      <el-sub-menu v-for="item in userMenus" :key="item.id" :index="item.url">
         <template #title>
           <el-icon>
             <component :is="item.icon.split('icon-')[1]"></component>

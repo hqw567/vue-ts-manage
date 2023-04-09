@@ -27,7 +27,7 @@
       </el-table-column>
       <el-table-column align="center" label="操作">
         <template #default="scope">
-          <el-button type="primary" @click="handleEditBtnClick(scope.row)" link
+          <el-button type="primary" link @click="handleEditBtnClick(scope.row)"
             >编辑</el-button
           >
           <el-button

@@ -7,8 +7,8 @@
             <el-form-item :prop="item.prop" :label="item.label">
               <template v-if="item.type === 'input'">
                 <el-input
-                  :placeholder="item.placeholder"
                   v-model="searchForm[item.prop]"
+                  :placeholder="item.placeholder"
                 ></el-input>
               </template>
               <template v-if="item.type === 'date-picker'">

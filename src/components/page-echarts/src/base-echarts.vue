@@ -1,6 +1,6 @@
 <template>
   <div class="base-echarts">
-    <div class="echarts" ref="echartsRef"></div>
+    <div ref="echartsRef" class="echarts"></div>
   </div>
 </template>
 
@@ -20,10 +20,11 @@ interface IProps {
 const props = defineProps<IProps>()
 let myChart: any
 onMounted(() => {
-  myChart = echarts.init(echartsRef.value!, 'light', {
-    renderer: 'canvas'
-  })
-
+  if (echartsRef.value) {
+    myChart = echarts.init(echartsRef.value, 'light', {
+      renderer: 'canvas'
+    })
+  }
   if (props.registerMap) {
     echarts.registerMap(props.registerMap.name, props.registerMap.data as any)
   }
