@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { ref } from 'vue'
 
 import useSystemStore from '@/store/main/system/system'
 import { storeToRefs } from 'pinia'
@@ -65,7 +65,7 @@ const systemStore = useSystemStore()
 const mainStore = useMainStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
-const newModal = ref(false)
+// const newModal = ref(false)
 const pageName = 'department'
 
 const { entireDepartments } = storeToRefs(mainStore)
@@ -104,7 +104,7 @@ function fetchPageListData(formData: any = {}) {
 
 function handleDeleteBtnClick(id: number) {
   // console.log('object :>> ', id)
-  systemStore.deletePageByIdAction(pageName, id).then((params) => {
+  systemStore.deletePageByIdAction(pageName, id).then(() => {
     // console.log('-------')
 
     fetchPageListData()

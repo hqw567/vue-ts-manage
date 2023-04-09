@@ -25,7 +25,7 @@ const useSystemStore = defineStore('system', {
       this.userTotalCount = userListResult.data.totalCount
     },
     async deleteUserByIdAction(userId: number) {
-      const deleteResult = await deleteUserById(userId)
+      await deleteUserById(userId)
     },
     async newUserDataAction(userInfo: any) {
       const userResult = await newUserData(userInfo)

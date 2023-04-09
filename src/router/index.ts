@@ -29,7 +29,7 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, form) => {
+router.beforeEach((to) => {
   const token = localCache.getCache(LOGIN_TOKEN)
 
   if (to.path === '/main' && !token) {

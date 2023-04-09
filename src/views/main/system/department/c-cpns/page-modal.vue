@@ -55,7 +55,7 @@ const mainStore = useMainStore()
 const systemStore = useSystemStore()
 const pageName = 'department'
 
-const { entireRoles, entireDepartments } = storeToRefs(mainStore)
+const { entireDepartments } = storeToRefs(mainStore)
 const emit = defineEmits(['refreshData'])
 function setModalVisible(isNew = true, itemData?: any) {
   console.log(itemData)
@@ -76,7 +76,7 @@ function handleCancel() {
 }
 function handleConfirm() {
   if (isNewRef.value) {
-    systemStore.newPageDataAction(pageName, form).then((params) => {
+    systemStore.newPageDataAction(pageName, form).then(() => {
       emit('refreshData')
     })
   } else {
@@ -84,11 +84,9 @@ function handleConfirm() {
     delete editForm.updateAt
     delete editForm.createAt
     console.log(editForm)
-    systemStore
-      .editPageDataAction(pageName, editForm.id, editForm)
-      .then((params) => {
-        emit('refreshData')
-      })
+    systemStore.editPageDataAction(pageName, editForm.id, editForm).then(() => {
+      emit('refreshData')
+    })
   }
 
   dialogFormVisible.value = false

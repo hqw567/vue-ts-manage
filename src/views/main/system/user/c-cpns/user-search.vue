@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormInstance } from 'element-plus'
 
 const emit = defineEmits(['queryClick', 'resetClick'])
 

@@ -17,11 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import MainMenu from '@/components/main-menu/main-menu.vue'
 import MainHeader from '@/components/main-header/main-header.vue'
 import { ref } from 'vue'
-const router = useRouter()
+// const router = useRouter()
 
 const isFold = ref(false)
 function handleFoldChange(flag: boolean) {

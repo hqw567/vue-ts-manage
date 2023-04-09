@@ -10,13 +10,13 @@ module.exports = {
   root: true,
   extends: [
     'eslint:recommended', // 使用eslint推荐的语法规范
-    'plugin:react/recommended', // react推荐的语法规范
     'prettier',
     'plugin:prettier/recommended'
   ],
-  parser: '@typescript-eslint/parser', // 使用解析器来解析ts的代码，使得eslint可以规范ts的代码
+  parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 'latest', // es的版本为最新版本
+    parser: '@typescript-eslint/parser',
     sourceType: 'module' // 代码的模块化方式，使用module的模块方式
   },
   plugins: ['@typescript-eslint', 'prettier'],
@@ -24,6 +24,8 @@ module.exports = {
     'prettier/prettier': 'error',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [2]
   }
 }

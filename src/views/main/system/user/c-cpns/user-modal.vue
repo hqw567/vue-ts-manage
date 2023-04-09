@@ -101,7 +101,7 @@ function handleCancel() {
 function handleConfirm() {
   // console.log(form)
   if (isNewRef.value) {
-    systemStore.newUserDataAction(form).then((params) => {
+    systemStore.newUserDataAction(form).then(() => {
       emit('refreshData')
     })
   } else {
@@ -111,7 +111,7 @@ function handleConfirm() {
     delete editForm.createAt
     delete editForm.password
     console.log(editForm)
-    systemStore.editUserDataAction(editForm.id, editForm).then((params) => {
+    systemStore.editUserDataAction(editForm.id, editForm).then(() => {
       emit('refreshData')
     })
   }

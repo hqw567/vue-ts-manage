@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 
 import useSystemStore from '@/store/main/system/system'
 import { storeToRefs } from 'pinia'
@@ -67,7 +67,7 @@ const systemStore = useSystemStore()
 
 const currentPage = ref(1)
 const pageSize = ref(10)
-const newModal = ref(false)
+// const newModal = ref(false)
 const emit = defineEmits(['newClick', 'editClick'])
 
 fetchUserListData()
@@ -92,7 +92,7 @@ function fetchUserListData(formData: any = {}) {
 
 function handleDeleteBtnClick(id: number) {
   // console.log('object :>> ', id)
-  systemStore.deleteUserByIdAction(id).then((params) => {
+  systemStore.deleteUserByIdAction(id).then(() => {
     // console.log('-------')
 
     fetchUserListData()

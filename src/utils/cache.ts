@@ -2,6 +2,7 @@ enum cacheType {
   Local,
   Session
 }
+
 class Cache {
   storage: Storage
 

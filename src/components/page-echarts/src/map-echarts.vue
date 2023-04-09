@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+// import { computed } from 'vue'
 import BaseEcharts from './base-echarts.vue'
 import type { IEchartsValueType } from '../types'
 import chinaJson from '../data/china.json'

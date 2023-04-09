@@ -78,18 +78,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { ref } from 'vue'
 
 import useSystemStore from '@/store/main/system/system'
 import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
-import useMainStore from '@/store/main/main'
+// import useMainStore from '@/store/main/main'
 import { usePermissions } from '@/hooks/usePermissions'
 const systemStore = useSystemStore()
-const mainStore = useMainStore()
+// const mainStore = useMainStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
-const newModal = ref(false)
+// const newModal = ref(false)
 
 systemStore.$onAction(({ name, after }) => {
   after(() => {
@@ -116,16 +116,16 @@ const isCreate = usePermissions(`${pageName}:create`)
 const isUpdate = usePermissions(`${pageName}:update`)
 const isDelete = usePermissions(`${pageName}:delete`)
 
-const { entireDepartments } = storeToRefs(mainStore)
+// const { entireDepartments } = storeToRefs(mainStore)
 // console.log(entireDepartments.value)
 
-const getDepartmentsName = (id: number) => {
-  const currentDepartment = entireDepartments.value.find((v) => {
-    return v.id === id
-  })
-  // console.log(currentDepartment)
-  if (currentDepartment) return currentDepartment?.name
-}
+// const getDepartmentsName = (id: number) => {
+//   const currentDepartment = entireDepartments.value.find((v) => {
+//     return v.id === id
+//   })
+//   // console.log(currentDepartment)
+//   if (currentDepartment) return currentDepartment?.name
+// }
 // console.log(getDepartmentsName(1))
 
 const emit = defineEmits(['newClick', 'editClick'])
@@ -164,7 +164,7 @@ function fetchPageListData(formData: any = {}, isSearch = false) {
 
 function handleDeleteBtnClick(id: number) {
   // console.log('object :>> ', id)
-  systemStore.deletePageByIdAction(pageName, id).then((params) => {
+  systemStore.deletePageByIdAction(pageName, id).then(() => {
     // console.log('-------')
 
     fetchPageListData()

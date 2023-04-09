@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { useLoginStore } from '@/store/login/login'
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 // import { ref } from 'vue'
 
@@ -47,7 +47,7 @@ const routePath = ref<string>()
 
 watch(
   () => route.path,
-  (newPath, oldPath) => {
+  (newPath) => {
     // route.path 发生了改变
     routePath.value = newPath
     // console.log('Route path changed from', oldPath, 'to', newPath)

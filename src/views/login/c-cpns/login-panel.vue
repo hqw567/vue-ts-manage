@@ -54,7 +54,6 @@ const accountRef = ref<InstanceType<typeof PanelAccount>>()
 const handleLoginBtnClick = () => {
   if (activeName.value === 'account') {
     accountRef.value?.loginAction(isRemPwd.value)
-  } else {
   }
 }
 </script>

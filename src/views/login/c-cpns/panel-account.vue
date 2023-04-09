@@ -56,7 +56,7 @@ function loginAction(isRemPwd: boolean) {
       const { name, password } = account
 
       console.log(name, password)
-      loginStore.loginAccountAction({ name, password }).then((params) => {
+      loginStore.loginAccountAction({ name, password }).then(() => {
         if (isRemPwd) {
           localCache.setCache(REMEMBER_ACCOUNT, account)
           localCache.setCache('isRemPwd', isRemPwd)
