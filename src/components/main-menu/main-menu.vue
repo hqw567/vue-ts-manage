@@ -13,7 +13,7 @@
       <el-sub-menu v-for="item in userMenus" :key="item.id" :index="item.url">
         <template #title>
           <el-icon>
-            <component :is="item.icon.split('icon-')[1]"></component>
+            <component :is="item.icon?.split('icon-')[1]"></component>
           </el-icon>
           <span>{{ item.name }}</span>
         </template>

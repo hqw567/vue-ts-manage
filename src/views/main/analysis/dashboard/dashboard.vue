@@ -78,7 +78,7 @@ const showGoodsCategorySale = computed(() => {
 
 const showGoodsAddressSale = computed(() => {
   return goodsAddressSale.value.map((item) => ({
-    name: item.address + '市',
+    name: item.address,
     value: item.count
   }))
 })

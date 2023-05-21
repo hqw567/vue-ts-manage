@@ -29,6 +29,8 @@ export const useLoginStore = defineStore('login', {
       localCache.setCache(LOGIN_TOKEN, this.token)
 
       const userInfoResult = await getUserInfoById(id)
+      console.log(userInfoResult, 'userInfoResult')
+
       const userInfo = userInfoResult.data
       this.userInfo = userInfo
 
