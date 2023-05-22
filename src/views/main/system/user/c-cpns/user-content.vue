@@ -18,14 +18,14 @@
           }}</el-button>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="createAt" label="创建时间">
+      <el-table-column align="center" prop="created_at" label="创建时间">
         <template #default="scope">
-          {{ formatUTC(scope.row.createAt) }}
+          {{ formatUTC(scope.row.created_at) }}
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="updateAt" label="更新时间">
+      <el-table-column align="center" prop="updated_at" label="更新时间">
         <template #default="scope">
-          {{ formatUTC(scope.row.updateAt) }}
+          {{ formatUTC(scope.row.updated_at) }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作">

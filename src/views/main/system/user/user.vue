@@ -26,12 +26,10 @@ import { ref } from 'vue'
 const contentRef = ref<InstanceType<typeof UserContent>>()
 const modalRef = ref<InstanceType<typeof UserModal>>()
 function handleResetClick() {
-  // console.log('handleResetClick :>> ', '----------------------')
   contentRef.value?.fetchUserListData()
 }
 function handleQueryClick(searchForm: any) {
   contentRef.value?.fetchUserListData(searchForm)
-  // console.log('handleQueryClick :>> ', searchForm)
 }
 function handleNewBtnClick() {
   modalRef.value?.setModalVisible()

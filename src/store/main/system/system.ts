@@ -30,15 +30,17 @@ const useSystemStore = defineStore('system', {
     async newUserDataAction(userInfo: any) {
       const userResult = await newUserData(userInfo)
       if (userResult.code === 0) {
+        console.log(userResult)
+
         ElNotification({
           title: 'Success',
-          message: userResult.data,
+          message: userResult.message,
           type: 'success'
         })
       } else {
         ElNotification({
           title: 'Error',
-          message: userResult.data,
+          message: userResult.message,
           type: 'error'
         })
       }
@@ -49,13 +51,13 @@ const useSystemStore = defineStore('system', {
       if (editUserDataResult.code === 0) {
         ElNotification({
           title: 'Success',
-          message: editUserDataResult.data,
+          message: editUserDataResult.message,
           type: 'success'
         })
       } else {
         ElNotification({
           title: 'Error',
-          message: editUserDataResult.data,
+          message: editUserDataResult.message,
           type: 'error'
         })
       }
@@ -74,13 +76,13 @@ const useSystemStore = defineStore('system', {
       if (pageResult.code === 0) {
         ElNotification({
           title: 'Success',
-          message: pageResult.data,
+          message: pageResult.message,
           type: 'success'
         })
       } else {
         ElNotification({
           title: 'Error',
-          message: pageResult.data,
+          message: pageResult.message,
           type: 'error'
         })
       }
@@ -91,13 +93,13 @@ const useSystemStore = defineStore('system', {
       if (editPageDataResult.code === 0) {
         ElNotification({
           title: 'Success',
-          message: editPageDataResult.data,
+          message: editPageDataResult.message,
           type: 'success'
         })
       } else {
         ElNotification({
           title: 'Error',
-          message: editPageDataResult.data,
+          message: editPageDataResult.message,
           type: 'error'
         })
       }

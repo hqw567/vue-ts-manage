@@ -107,8 +107,8 @@ function handleConfirm() {
   } else {
     // console.log(form.id)
     const editForm = form
-    delete editForm.updateAt
-    delete editForm.createAt
+    delete editForm.updated_at
+    delete editForm.create_at
     delete editForm.password
     console.log(editForm)
     systemStore.editUserDataAction(editForm.id, editForm).then(() => {

@@ -114,8 +114,8 @@ function handleConfirm() {
   if (props.otherInfo) {
     allData = { ...form, ...props.otherInfo }
   }
-  delete allData.updateAt
-  delete allData.createAt
+  delete allData.updated_at
+  delete allData.created_at
   if (isNewRef.value) {
     systemStore.newPageDataAction(pageName.value, allData).then(() => {
       emit('refreshData')

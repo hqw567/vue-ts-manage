@@ -26,9 +26,9 @@
             </el-select> </el-form-item
         ></el-col>
         <el-col :span="8">
-          <el-form-item label="创建时间" prop="createAt">
+          <el-form-item label="创建时间" prop="created_at">
             <el-date-picker
-              v-model="searchForm.createAt"
+              v-model="searchForm.created_at"
               type="daterange"
               unlink-panels
               range-separator="-"
@@ -65,7 +65,7 @@ const searchForm = reactive({
   name: '',
   cellphone: '',
   enable: '',
-  createAt: '',
+  created_at: '',
   realname: ''
 })
 const searchFormRef = ref<FormInstance>()

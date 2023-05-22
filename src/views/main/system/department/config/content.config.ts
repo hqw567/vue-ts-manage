@@ -37,12 +37,12 @@ const contentConfig = {
     },
     {
       type: 'timer',
-      prop: 'createAt',
+      prop: 'created_at',
       label: '创建时间'
     },
     {
       type: 'timer',
-      prop: 'updateAt',
+      prop: 'updated_at',
       label: '更新时间'
     },
     {

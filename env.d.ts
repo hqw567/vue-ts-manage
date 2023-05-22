@@ -1,9 +1,12 @@
 /// <reference types="vite/client" />
 
 declare module '*.vue' {
-  import { DefindComponent } from 'vue'
-  const component: DefindComponent
-  export default component
+  import type { DefineComponent } from 'vue'
+  const vueComponent: DefineComponent
+  export default vueComponent
 }
 
-declare module '*.mjs'
+declare module 'element-plus/dist/locale/zh-cn.mjs' {
+  const zhCn: any
+  export default zhCn
+}

@@ -8,7 +8,7 @@ export function newUserData(userInfo: any) {
 }
 
 export function editUserData(id: number, userInfo: any) {
-  return hyRequest.patch({
+  return hyRequest.put({
     url: '/users/' + id,
     data: userInfo
   })
@@ -39,7 +39,7 @@ export function newPageData(pageName: string, userInfo: any) {
 }
 
 export function editPageData(pageName: string, id: number, userInfo: any) {
-  return hyRequest.patch({
+  return hyRequest.put({
     url: `/${pageName}/` + id,
     data: userInfo
   })
