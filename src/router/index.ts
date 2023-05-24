@@ -31,12 +31,12 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const token = localCache.getCache(LOGIN_TOKEN)
-
-  if (to.path === '/main' && !token) {
+  // const isMainPath = to.path.startsWith('/main')
+  if (to.path === '/main/' && !token) {
     return '/login'
   }
 
-  if (to.path === '/main') {
+  if (to.path === '/main/') {
     return firstMenu?.url
   }
 })

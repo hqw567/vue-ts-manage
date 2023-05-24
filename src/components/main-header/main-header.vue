@@ -46,8 +46,12 @@ function handleMenuIconClick() {
   emit('foldChange', isFold.value)
 }
 function handleExitClicks() {
+  // router.push('/login')
+  router.replace({
+    path: '/login',
+    replace: true
+  })
   localCache.removeCache(LOGIN_TOKEN)
-  router.push('/login')
 }
 </script>
 
